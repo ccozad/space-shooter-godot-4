@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://w8xwlohjkodl"]
+
+[ext_resource type="FontFile" uid="uid://dfvkq8aj67fa2" path="res://fonts/futurespore.regular.ttf" id="1_agl2k"]
+[ext_resource type="Script" path="res://scenes/debug.gd" id="2_ghvg3"]
+
+[node name="Debug" type="Label"]
+theme_override_fonts/font = ExtResource("1_agl2k")
+theme_override_font_sizes/font_size = 24
+script = ExtResource("2_ghvg3")
