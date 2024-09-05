@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2r2uug0o8xbm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r0lcl"]
+size = Vector3(1, 29, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kvirg"]
+size = Vector3(200, 29, 1)
+
+[node name="Boundary" type="Node3D"]
+
+[node name="LeftWall" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LeftWall"]
+shape = SubResource("BoxShape3D_r0lcl")
+
+[node name="RightWall" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RightWall"]
+shape = SubResource("BoxShape3D_r0lcl")
+
+[node name="TopWall" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -35)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TopWall"]
+shape = SubResource("BoxShape3D_kvirg")
+
+[node name="BottomWall" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 37)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BottomWall"]
+shape = SubResource("BoxShape3D_kvirg")

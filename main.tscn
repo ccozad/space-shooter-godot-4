@@ -4,12 +4,10 @@
 [ext_resource type="Script" path="res://main.gd" id="1_qjydq"]
 [ext_resource type="PackedScene" uid="uid://i25aas33a7am" path="res://scenes/HUD.tscn" id="2_sp3qy"]
 [ext_resource type="PackedScene" uid="uid://bdp5nd7vu83tn" path="res://scenes/ship_1.tscn" id="3_wmjkf"]
+[ext_resource type="PackedScene" uid="uid://c2r2uug0o8xbm" path="res://scenes/boundary.tscn" id="5_fr5dm"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_r0lcl"]
-size = Vector3(1, 29, 100)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_kvirg"]
-size = Vector3(200, 29, 1)
+[sub_resource type="Environment" id="Environment_otv2b"]
+background_mode = 1
 
 [node name="MainRoot" type="Node3D"]
 script = ExtResource("1_qjydq")
@@ -36,28 +34,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="ship_1" parent="." instance=ExtResource("3_wmjkf")]
 
-[node name="Boundary" type="Node3D" parent="."]
+[node name="Boundary" parent="." instance=ExtResource("5_fr5dm")]
 
-[node name="LeftWall" type="StaticBody3D" parent="Boundary"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Boundary/LeftWall"]
-shape = SubResource("BoxShape3D_r0lcl")
-
-[node name="RightWall" type="StaticBody3D" parent="Boundary"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Boundary/RightWall"]
-shape = SubResource("BoxShape3D_r0lcl")
-
-[node name="TopWall" type="StaticBody3D" parent="Boundary"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -35)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Boundary/TopWall"]
-shape = SubResource("BoxShape3D_kvirg")
-
-[node name="BottomWall" type="StaticBody3D" parent="Boundary"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 37)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Boundary/BottomWall"]
-shape = SubResource("BoxShape3D_kvirg")
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_otv2b")
