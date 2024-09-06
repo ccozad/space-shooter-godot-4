@@ -13,6 +13,7 @@ func _ready() -> void:
 		$"Boundary/BottomWall".position.z
 	)
 	GameManager.spawn_stars(self)
+	GameManager.spawn_asteroids(self)
 	debug.init(ship_1)
 
 

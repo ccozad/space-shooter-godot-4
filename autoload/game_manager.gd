@@ -1,6 +1,7 @@
 extends Node
 
 @onready var SMALL_STAR = preload("res://scenes/small_star.tscn")
+@onready var ASTEROID = preload("res://scenes/asteroid.tscn")
 
 var boundary = {
 	"left": 0.0,
@@ -45,3 +46,15 @@ func process_background(root_node, delta):
 		if z > boundary.bottom + boundary_margin:
 			small_star.queue_free()
 			spawn_star(root_node, true)
+
+func spawn_asteroids(root_node):
+	for i in 5:
+		var spawn = {
+			"coords": Vector3(-40 + i *20, 0, -40),
+			"scale": Utils.get_random_vector3_in_range(1, 4),
+			"direction": Vector3(0, 0, randf_range(5, 15)),
+			"rotation": Utils.get_random_vector3_in_range(0.1, 1)
+		}
+		var asteroid = ASTEROID.instantiate()
+		asteroid.init(root_node, spawn)
+		root_node.add_child(asteroid)
