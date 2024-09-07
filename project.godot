@@ -87,3 +87,10 @@ shoot_primary={
 3d_physics/layer_8="Reserved 2"
 3d_physics/layer_9="Reserved 3"
 3d_physics/layer_10="Debris"
+
+[shader_globals]
+
+global_time={
+"type": "float",
+"value": 0.0
+}

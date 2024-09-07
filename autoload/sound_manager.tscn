@@ -1,10 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://cr1urcgmf7564"]
+[gd_scene load_steps=4 format=3 uid="uid://cr1urcgmf7564"]
 
 [ext_resource type="Script" path="res://autoload/sound_manager.gd" id="1_kcf2j"]
 [ext_resource type="AudioStream" uid="uid://crsjy2p2rku3v" path="res://sounds/laser.wav" id="2_cuaju"]
+[ext_resource type="AudioStream" uid="uid://7po0vts383kp" path="res://sounds/explosion.wav" id="3_obdrr"]
 
 [node name="SoundManager" type="Node"]
 script = ExtResource("1_kcf2j")
 
 [node name="BulletSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_cuaju")
+
+[node name="ExplosionSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_obdrr")

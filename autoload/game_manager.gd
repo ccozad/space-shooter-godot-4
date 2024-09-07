@@ -3,6 +3,7 @@ extends Node
 @onready var SMALL_STAR = preload("res://scenes/small_star.tscn")
 @onready var ASTEROID = preload("res://scenes/asteroid.tscn")
 @onready var BULLET = preload("res://scenes/bullet.tscn")
+@onready var EXPLOSION = preload("res://scenes/explosion.tscn")
 
 var boundary = {
 	"left": 0.0,
@@ -72,3 +73,15 @@ func fire_player_weapon(root_node):
 			bullet.init(weapon)
 			root_node.add_child(bullet)
 	SoundManager.fire_bullet()
+
+func create_explosion(root_node, source_node, width, height):
+	var explosion = EXPLOSION.instantiate()
+	var speed = 1.0
+	explosion.init(source_node.global_transform.origin.x,
+		source_node.global_transform.origin.z,
+		width,
+		height,
+		speed)
+	root_node.add_child(explosion)
+	SoundManager.explode()
+	source_node.queue_free()
