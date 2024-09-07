@@ -41,6 +41,8 @@ shadow_mesh = SubResource("ArrayMesh_ulu25")
 radius = 1.7
 
 [node name="asteroid" type="Area3D" groups=["enemy"]]
+collision_layer = 2
+collision_mask = 4
 script = ExtResource("1_hi2m3")
 
 [node name="rock" type="MeshInstance3D" parent="."]

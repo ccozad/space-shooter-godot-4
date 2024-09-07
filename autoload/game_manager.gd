@@ -2,6 +2,7 @@ extends Node
 
 @onready var SMALL_STAR = preload("res://scenes/small_star.tscn")
 @onready var ASTEROID = preload("res://scenes/asteroid.tscn")
+@onready var BULLET = preload("res://scenes/bullet.tscn")
 
 var boundary = {
 	"left": 0.0,
@@ -11,6 +12,10 @@ var boundary = {
 }
 
 var boundary_margin = 10.0
+var player
+
+func set_player(_player):
+	player = _player
 
 func set_boundary(left, right, top, bottom):
 	boundary.left = left
@@ -50,6 +55,7 @@ func process_background(root_node, delta):
 func spawn_asteroids(root_node):
 	for i in 5:
 		var spawn = {
+			"hit_points": 20,
 			"coords": Vector3(-40 + i *20, 0, -40),
 			"scale": Utils.get_random_vector3_in_range(1, 4),
 			"direction": Vector3(0, 0, randf_range(5, 15)),
@@ -58,3 +64,11 @@ func spawn_asteroids(root_node):
 		var asteroid = ASTEROID.instantiate()
 		asteroid.init(root_node, spawn)
 		root_node.add_child(asteroid)
+
+func fire_player_weapon(root_node):
+	for weapon in player.weapons:
+		if weapon.active:
+			var bullet = BULLET.instantiate()
+			bullet.init(weapon)
+			root_node.add_child(bullet)
+	SoundManager.fire_bullet()
