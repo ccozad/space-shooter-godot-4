@@ -39,3 +39,6 @@ func _on_player_destroyed():
 
 func _on_enemy_destroyed(enemy):
 	GameManager.create_explosion(self, enemy, 15, 15)
+
+func _on_show_hit_effect(enemy, bullet):
+	GameManager.create_hit_effect(self, enemy, bullet)

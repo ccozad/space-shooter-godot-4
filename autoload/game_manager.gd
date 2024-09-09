@@ -4,6 +4,7 @@ extends Node
 @onready var ASTEROID = preload("res://scenes/asteroid.tscn")
 @onready var BULLET = preload("res://scenes/bullet.tscn")
 @onready var EXPLOSION = preload("res://scenes/explosion.tscn")
+@onready var HIT_EFFECT = preload("res://scenes/hit_effect.tscn")
 
 var boundary = {
 	"left": 0.0,
@@ -85,3 +86,12 @@ func create_explosion(root_node, source_node, width, height):
 	root_node.add_child(explosion)
 	SoundManager.explode()
 	source_node.queue_free()
+
+func create_hit_effect(root_node, enemy, bullet):
+	var hit_effect = HIT_EFFECT.instantiate()
+	hit_effect.init(bullet.position.x, bullet.position.z)
+	root_node.add_child(hit_effect)
+	if enemy.is_in_group("metal"):
+		SoundManager.metal_hit()
+	else:
+		SoundManager.rock_hit()

@@ -2,6 +2,7 @@ class_name Lifecycle
 extends Node
 
 signal enemy_destroyed(source_node)
+signal bullet_hit(enemy, bullet)
 
 var spawn = {}
 var elapsed_time = 0.0
@@ -21,6 +22,7 @@ func init(root_node, enemy, _spawn):
 	hit_points = spawn.hit_points
 	max_hit_points = hit_points
 	connect("enemy_destroyed", Callable(root_node, "_on_enemy_destroyed"))
+	connect("bullet_hit", Callable(root_node, "_on_show_hit_effect"))
 
 func process(enemy, delta):
 	elapsed_time += delta
@@ -37,6 +39,7 @@ func process(enemy, delta):
 
 func process_hit(enemy, area):
 	hit_points -= area.hit_points
+	bullet_hit.emit(enemy, area)
 	if hit_points <= 0:
 		explode(enemy)
 
