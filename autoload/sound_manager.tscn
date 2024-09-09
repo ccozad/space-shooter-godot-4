@@ -16,12 +16,15 @@ volume_db = -10.306
 
 [node name="ExplosionSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_obdrr")
+volume_db = -7.924
 
 [node name="RockHit" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_rrp1s")
+volume_db = -8.914
 
 [node name="RockHit2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_pdakx")
+volume_db = -8.914
 
 [node name="RockHit3" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_66abv")
