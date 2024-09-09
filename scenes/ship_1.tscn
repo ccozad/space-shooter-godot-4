@@ -179,8 +179,9 @@ shadow_mesh = SubResource("ArrayMesh_cu1q6")
 [sub_resource type="BoxShape3D" id="BoxShape3D_5wasy"]
 size = Vector3(7.48196, 1, 4.79758)
 
-[node name="ship_1" type="CharacterBody3D"]
+[node name="ship_1" type="CharacterBody3D" groups=["modules"]]
 collision_mask = 16
+axis_lock_linear_y = true
 script = ExtResource("1_c3726")
 
 [node name="Body" type="MeshInstance3D" parent="."]
