@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://bdp5nd7vu83tn"]
+[gd_scene load_steps=19 format=4 uid="uid://bdp5nd7vu83tn"]
 
 [ext_resource type="Texture2D" uid="uid://cqxxacd7uaiuc" path="res://models/ship1_teal-black.png" id="1_0j0sm"]
 [ext_resource type="Script" path="res://scenes/ship_1.gd" id="1_c3726"]
@@ -179,6 +179,20 @@ shadow_mesh = SubResource("ArrayMesh_cu1q6")
 [sub_resource type="BoxShape3D" id="BoxShape3D_5wasy"]
 size = Vector3(7.48196, 1, 4.79758)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_11a7d"]
+transparency = 1
+albedo_color = Color(0, 0.92549, 0.952941, 0.117647)
+albedo_texture_msdf = true
+metallic = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_je0hu"]
+material = SubResource("StandardMaterial3D_11a7d")
+radius = 5.0
+height = 10.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_4x46p"]
+radius = 5.0
+
 [node name="ship_1" type="CharacterBody3D" groups=["modules"]]
 collision_mask = 16
 axis_lock_linear_y = true
@@ -243,4 +257,13 @@ script = ExtResource("3_4jsrv")
 [node name="Direction" type="Node3D" parent="Weapons/Right"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.434508)
 
+[node name="Shield" type="Area3D" parent="."]
+
+[node name="Sphere" type="MeshInstance3D" parent="Shield"]
+mesh = SubResource("SphereMesh_je0hu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Shield"]
+shape = SubResource("SphereShape3D_4x46p")
+
 [connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="area_entered" from="Shield" to="." method="_on_shield_area_entered"]

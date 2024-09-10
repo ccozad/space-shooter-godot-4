@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://i25aas33a7am"]
+[gd_scene load_steps=3 format=3 uid="uid://i25aas33a7am"]
 
+[ext_resource type="Script" path="res://scenes/hud.gd" id="1_f7jiu"]
 [ext_resource type="FontFile" uid="uid://dfvkq8aj67fa2" path="res://fonts/futurespore.regular.ttf" id="1_yiw2r"]
 
 [node name="Hud" type="CanvasLayer"]
+script = ExtResource("1_f7jiu")
 
 [node name="Player" type="MarginContainer" parent="."]
 offset_right = 330.0
@@ -15,24 +17,24 @@ theme_override_constants/margin_right = 10
 layout_mode = 2
 columns = 2
 
-[node name="HullIntegrityLabel" type="Label" parent="Player/GridContainer"]
+[node name="PlayerHullIntegrityLabel" type="Label" parent="Player/GridContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_yiw2r")
 theme_override_font_sizes/font_size = 20
 text = "Hull Integrity: "
 
-[node name="HullIntegrityBar" type="ProgressBar" parent="Player/GridContainer"]
+[node name="PlayerHullIntegrityPowerBar" type="ProgressBar" parent="Player/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 value = 100.0
 
-[node name="SheildPowerLabel" type="Label" parent="Player/GridContainer"]
+[node name="PlayerSheildPowerLabel" type="Label" parent="Player/GridContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_yiw2r")
 theme_override_font_sizes/font_size = 20
 text = "Shield Power:"
 
-[node name="ShieldPowerBar" type="ProgressBar" parent="Player/GridContainer"]
+[node name="PlayerShieldPowerBar" type="ProgressBar" parent="Player/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 value = 100.0

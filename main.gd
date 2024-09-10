@@ -2,6 +2,8 @@ extends Node3D
 
 @onready var ship_1: CharacterBody3D = $ship_1
 @onready var debug: Label = $Debug
+@onready var hud: CanvasLayer = $Hud
+
 
 var fire_cadence = 0.2
 var fire_cooldown = 0.0
@@ -17,6 +19,7 @@ func _ready() -> void:
 	GameManager.spawn_stars(self)
 	GameManager.spawn_asteroids(self)
 	ship_1.connect("player_destroyed", Callable(self, "_on_player_destroyed"))
+	ship_1.connect("update_hud", Callable(self, "_on_update_hud"))
 	ship_1.init()
 	GameManager.set_player(ship_1)
 	debug.init(ship_1)
@@ -43,3 +46,6 @@ func _on_enemy_destroyed(enemy):
 
 func _on_show_hit_effect(enemy, bullet):
 	GameManager.create_hit_effect(self, enemy, bullet)
+
+func _on_update_hud():
+	hud.set_player_values(ship_1)

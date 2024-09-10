@@ -1,16 +1,24 @@
 extends CharacterBody3D
 
 @onready var weapons_node: Node3D = $Weapons
+@onready var shield: Area3D = $Shield
+@onready var shield_collision: CollisionShape3D = $Shield/CollisionShape3D
 
 var weapons = []
 var tilt = 0.0
 var tilt_direction = 0.0
 var shift_pressed = false
+var max_hull_integrity = 100.0
+var hull_integrity = max_hull_integrity
+var max_shield_power = 100.0
+var shield_power = max_shield_power
 
 const SPEED = 30.0
-const FAST_SPEED = 80
+const FAST_SPEED = 80.0
 const MAX_TILT = 0.5
+
 signal player_destroyed()
+signal update_hud()
 
 func init():
 	for weapon in weapons_node.get_children():
@@ -60,6 +68,47 @@ func _physics_process(delta: float) -> void:
 		tilt = clamp(tilt, -MAX_TILT, MAX_TILT)
 	move_and_slide()
 
+func shield_hit(value):
+	shield_power -= value
+	
+func remove_shield():
+	shield_power = 0
+	shield_collision.set_defe("disabled", true)
+	shield.visible = false
+
+func process_hit(area, enemy_impact):
+	var value = get_hit_points(area, enemy_impact)
+	if shield_power > 0:
+		shield_hit(value)
+		update_hud.emit()
+		if shield_power <= 0:
+			value = -shield_power
+			remove_shield()
+	
+	if shield_power <= 0:
+		hull_integrity -= value
+		update_hud.emit()
+		if hull_integrity <= 0:
+			player_destroyed.emit()
+	
+	if enemy_impact:
+		if hull_integrity > 0:
+			area.explode()
+		else:
+			area.queue_free()
+
+func get_hit_points(area, enemy_impact):
+	return area.lifecycle.hit_points if enemy_impact else area.hit_points
 
 func _on_area_3d_area_entered(area: Area3D) -> void:
-	player_destroyed.emit()
+	var bullet_impact = area.is_in_group("enemy_bullet")
+	var enemy_impact = area.is_in_group("enemy")
+	if bullet_impact or enemy_impact:
+		process_hit(area, enemy_impact)
+
+
+func _on_shield_area_entered(area: Area3D) -> void:
+	var bullet_impact = area.is_in_group("enemy_bullet")
+	var enemy_impact = area.is_in_group("enemy")
+	if bullet_impact or enemy_impact:
+		process_hit(area, enemy_impact)
