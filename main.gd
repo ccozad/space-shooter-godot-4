@@ -3,6 +3,7 @@ extends Node3D
 @onready var ship_1: CharacterBody3D = $ship_1
 @onready var debug: Label = $Debug
 @onready var hud: CanvasLayer = $Hud
+@onready var camera: Camera3D = $Camera3D
 
 
 var fire_cadence = 0.2
@@ -16,6 +17,7 @@ func _ready() -> void:
 		$"Boundary/TopWall".position.z,
 		$"Boundary/BottomWall".position.z
 	)
+	GameManager.set_camera(camera)
 	GameManager.spawn_stars(self)
 	GameManager.spawn_asteroids(self)
 	ship_1.connect("player_destroyed", Callable(self, "_on_player_destroyed"))

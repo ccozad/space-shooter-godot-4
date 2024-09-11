@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://bdp5nd7vu83tn"]
+[gd_scene load_steps=24 format=4 uid="uid://bdp5nd7vu83tn"]
 
 [ext_resource type="Texture2D" uid="uid://cqxxacd7uaiuc" path="res://models/ship1_teal-black.png" id="1_0j0sm"]
 [ext_resource type="Script" path="res://scenes/ship_1.gd" id="1_c3726"]
@@ -193,6 +193,44 @@ height = 10.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_4x46p"]
 radius = 5.0
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_li7xi"]
+emission_shape_scale = Vector3(1, 1, 0)
+emission_shape = 1
+emission_sphere_radius = 0.02
+angle_min = 1.07288e-05
+angle_max = 360.0
+direction = Vector3(0, 0, 1)
+angular_velocity_min = -1.60933e-05
+angular_velocity_max = 40.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 2.0
+linear_accel_max = 10.0
+scale_min = 0.1
+scale_max = 0.7
+
+[sub_resource type="Gradient" id="Gradient_jj86m"]
+offsets = PackedFloat32Array(0.114035, 0.929825)
+colors = PackedColorArray(0.996078, 1, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2y6e7"]
+gradient = SubResource("Gradient_jj86m")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dkdkh"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 0.980392, 0.854902, 1)
+albedo_texture = SubResource("GradientTexture1D_2y6e7")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_3xqxl"]
+material = SubResource("StandardMaterial3D_dkdkh")
+
 [node name="ship_1" type="CharacterBody3D" groups=["modules"]]
 collision_mask = 16
 axis_lock_linear_y = true
@@ -264,6 +302,26 @@ mesh = SubResource("SphereMesh_je0hu")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Shield"]
 shape = SubResource("SphereShape3D_4x46p")
+
+[node name="Flames" type="Node3D" parent="."]
+
+[node name="LeftFlame" type="GPUParticles3D" parent="Flames"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.396525, 0.00174552, 2.6107)
+amount = 200
+lifetime = 0.4
+local_coords = true
+draw_order = 3
+process_material = SubResource("ParticleProcessMaterial_li7xi")
+draw_pass_1 = SubResource("QuadMesh_3xqxl")
+
+[node name="RightFlame" type="GPUParticles3D" parent="Flames"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.317881, 0.00174552, 2.6107)
+amount = 200
+lifetime = 0.4
+local_coords = true
+draw_order = 3
+process_material = SubResource("ParticleProcessMaterial_li7xi")
+draw_pass_1 = SubResource("QuadMesh_3xqxl")
 
 [connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
 [connection signal="area_entered" from="Shield" to="." method="_on_shield_area_entered"]

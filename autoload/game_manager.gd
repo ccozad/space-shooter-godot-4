@@ -15,9 +15,13 @@ var boundary = {
 
 var boundary_margin = 10.0
 var player
+var camera
 
 func set_player(_player):
 	player = _player
+
+func set_camera(_camera):
+	camera = _camera
 
 func set_boundary(left, right, top, bottom):
 	boundary.left = left
@@ -31,6 +35,9 @@ func is_in_boundary(node, add_margin = true):
 		and node.global_position.x < boundary.right + margin
 		and node.global_position.z > boundary.top - margin
 		and node.global_position.z < boundary.bottom + margin)
+
+func to_2D(vector3):
+	return camera.unproject_position(vector3)
 
 func spawn_stars(root_node):
 	for i in 40:
