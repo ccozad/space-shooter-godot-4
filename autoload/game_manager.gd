@@ -73,19 +73,6 @@ func process_debris(delta):
 		else:
 			mesh.set_meta("timer", time_left)
 
-func spawn_asteroids(root_node):
-	for i in 5:
-		var spawn = {
-			"hit_points": 20,
-			"coords": Vector3(-40 + i *20, 0, -40),
-			"scale": Utils.get_random_vector3_in_range(1, 4),
-			"direction": Vector3(0, 0, randf_range(5, 15)),
-			"rotation": Utils.get_random_vector3_in_range(0.1, 1)
-		}
-		var asteroid = ASTEROID.instantiate()
-		asteroid.init(root_node, spawn)
-		root_node.add_child(asteroid)
-
 func fire_player_weapon(root_node):
 	for weapon in player.weapons:
 		if weapon.active:
@@ -130,3 +117,11 @@ func create_hit_effect(root_node, enemy, bullet):
 		SoundManager.metal_hit()
 	else:
 		SoundManager.rock_hit()
+
+func fire_enemy_weapon(root_node, enemy, event):
+	for weapon in enemy.weapons:
+		if weapon.name == event.fire.weapon:
+			if is_in_boundary(weapon, false):
+				var bullet = event.fire.shot.instantiate()
+				bullet.init(weapon, enemy.rotation.y)
+				root_node.add_child(bullet)

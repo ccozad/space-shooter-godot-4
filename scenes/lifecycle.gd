@@ -3,6 +3,7 @@ extends Node
 
 signal enemy_destroyed(source_node)
 signal bullet_hit(enemy, bullet)
+signal weapon_fired(enemy, event)
 
 var spawn = {}
 var elapsed_time = 0.0
@@ -11,9 +12,12 @@ var current_rotation
 var speed
 var max_hit_points = 0.0
 var hit_points = 0.0
+var timeline = []
+var previous_second = 0.0
 
-func init(root_node, enemy, _spawn):
+func init(root_node, enemy, _spawn, _timeline):
 	spawn = _spawn
+	timeline = _timeline
 	enemy.translate(spawn.coords)
 	enemy.scale_object_local(spawn.scale)
 	current_direction = spawn.direction
@@ -23,9 +27,16 @@ func init(root_node, enemy, _spawn):
 	max_hit_points = hit_points
 	connect("enemy_destroyed", Callable(root_node, "_on_enemy_destroyed"))
 	connect("bullet_hit", Callable(root_node, "_on_show_hit_effect"))
+	connect("weapon_fired", Callable(root_node, "_on_weapon_fired"))
 
 func process(enemy, delta):
 	elapsed_time += delta
+	if elapsed_time - previous_second > 1.0:
+		previous_second+= 1
+		for event in timeline:
+			if event.timestamp <= elapsed_time and not event.has("processed"):
+				process_event(enemy, event)
+				event.processed = true
 	enemy.global_position.x += current_direction.x * delta
 	enemy.global_position.z += current_direction.z * delta
 	
@@ -36,6 +47,11 @@ func process(enemy, delta):
 
 	if elapsed_time > 20 and not GameManager.is_in_boundary(enemy):
 		enemy.queue_free()
+
+func process_event(enemy, event):
+	if event.has("fire"):
+		if event.fire.has("weapon") and GameManager.is_in_boundary(enemy):
+			weapon_fired.emit(enemy, event)
 
 func process_hit(enemy, area):
 	hit_points -= area.hit_points

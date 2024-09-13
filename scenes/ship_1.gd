@@ -94,8 +94,8 @@ func process_hit(area, enemy_impact):
 	if enemy_impact:
 		if hull_integrity > 0:
 			area.explode()
-		else:
-			area.queue_free()
+	else:
+		area.queue_free()
 
 func get_hit_points(area, enemy_impact):
 	return area.lifecycle.hit_points if enemy_impact else area.hit_points

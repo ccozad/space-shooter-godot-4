@@ -8,6 +8,8 @@ extends Node3D
 
 var fire_cadence = 0.2
 var fire_cooldown = 0.0
+var current_level
+var level_loaded = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -19,7 +21,6 @@ func _ready() -> void:
 	)
 	GameManager.set_camera(camera)
 	GameManager.spawn_stars(self)
-	GameManager.spawn_asteroids(self)
 	ship_1.connect("player_destroyed", Callable(self, "_on_player_destroyed"))
 	ship_1.connect("update_hud", Callable(self, "_on_update_hud"))
 	ship_1.init()
@@ -29,11 +30,17 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	GameManager.process_background(self, delta)
-	GameManager.process_debris(delta)
-	if Input.is_action_pressed("shoot_primary") and fire_cooldown <= 0:
-		fire_bullet()
-	fire_cooldown -= delta
+	if level_loaded:
+		GameManager.process_background(self, delta)
+		GameManager.process_debris(delta)
+		current_level.process(self, delta)
+		if Input.is_action_pressed("shoot_primary") and fire_cooldown <= 0:
+			fire_bullet()
+		fire_cooldown -= delta
+	else:
+		current_level = LevelManager.load_level("tutorial")
+		current_level.init(self)
+		level_loaded = true
 
 func fire_bullet():
 	if Utils.is_valid_node(ship_1):
@@ -51,3 +58,6 @@ func _on_show_hit_effect(enemy, bullet):
 
 func _on_update_hud():
 	hud.set_player_values(ship_1)
+
+func _on_weapon_fired(enemy, event):
+	GameManager.fire_enemy_weapon(self, enemy, event)

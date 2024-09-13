@@ -13,3 +13,6 @@ func get_all_children(in_node, array = []):
 	for child in in_node.get_children():
 		array = get_all_children(child, array)
 	return array
+
+func get_random_x_in_viewport(padding = 0.0):
+	return randf_range(GameManager.boundary.left + padding, GameManager.boundary.right - padding)
