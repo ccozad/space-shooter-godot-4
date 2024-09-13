@@ -11,6 +11,8 @@ var previous_second = 0
 func init(node):
 	timeline.append({"timestamp": 1, "wave": get_asteroid_wave()})
 	timeline.append({"timestamp": 3, "wave": get_enemy_ship_wave()})
+	timeline.append({"timestamp": 7, "wave": get_asteroid_wave()})
+	timeline.append({"timestamp": 12, "wave": get_enemy_ship_wave()})
 	print("tutorial scene initialized")
 
 func process(node, delta):
@@ -65,6 +67,13 @@ func get_enemy_ship_timeline():
 	return [
 		{
 			"timestamp": 5,
+			"fire": {
+				"shot": ENEMY_BULLET,
+				"weapon": "Main"
+			}
+		},
+		{
+			"timestamp": 10,
 			"fire": {
 				"shot": ENEMY_BULLET,
 				"weapon": "Main"

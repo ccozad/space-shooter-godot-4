@@ -73,7 +73,7 @@ func shield_hit(value):
 	
 func remove_shield():
 	shield_power = 0
-	shield_collision.set_defe("disabled", true)
+	shield_collision.set_deferred("disabled", true)
 	shield.visible = false
 
 func process_hit(area, enemy_impact):

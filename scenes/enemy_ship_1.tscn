@@ -101,9 +101,9 @@ shape = SubResource("SphereShape3D_2tngn")
 [node name="Weapons" type="Node3D" parent="."]
 
 [node name="Main" type="Node3D" parent="Weapons"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.11783)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.00363)
 
 [node name="Direction" type="Node3D" parent="Weapons/Main"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0286683)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.338553)
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
