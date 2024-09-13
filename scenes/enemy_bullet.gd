@@ -10,8 +10,6 @@ func init(weapon, angle = 0.0):
 	position.y = 0
 	var direction_node = weapon.get_children()[0]
 	current_direction = direction_node.position
-	print("Initializing enemy bullet")
-	print(str(current_direction))
 	var direction_angle = angle + Vector2(current_direction.x, current_direction.z).angle_to(Vector2.UP)
 	rotate_y(direction_angle)
 
