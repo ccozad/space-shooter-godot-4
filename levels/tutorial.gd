@@ -49,12 +49,12 @@ func get_asteroid_wave():
 
 func get_enemy_ship_wave():
 		var wave = []
-		for i in 11:
+		for i in 5:
 			wave.append({
 				"enemy": ENEMY_SHIP_1,
 				"spawn": {
 					"hit_points": 20,
-					"coords": Vector3(-50 + i * 10, 0, GameManager.boundary.top + 1),
+					"coords": Vector3(-50 + i * 30, 0, GameManager.boundary.top + 1),
 					"scale": Vector3(2, 2, 2),
 					"direction": Vector3(0, 0, 2.0),
 					"rotation": Vector3(0, 0, 0)

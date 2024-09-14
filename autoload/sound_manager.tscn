@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cr1urcgmf7564"]
+[gd_scene load_steps=8 format=3 uid="uid://krqnbspdwnbv"]
 
 [ext_resource type="Script" path="res://autoload/sound_manager.gd" id="1_kcf2j"]
 [ext_resource type="AudioStream" uid="uid://crsjy2p2rku3v" path="res://sounds/laser.wav" id="2_cuaju"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://ds451ou610k3a" path="res://sounds/hit_1.wav" id="4_rrp1s"]
 [ext_resource type="AudioStream" uid="uid://crqvqdbv5v1up" path="res://sounds/hit_3.wav" id="5_pdakx"]
 [ext_resource type="AudioStream" uid="uid://b1daxv4o751mq" path="res://sounds/hit_4.wav" id="6_66abv"]
+[ext_resource type="AudioStream" uid="uid://cj58s28ypwqx3" path="res://sounds/enemy_laser.wav" id="7_5l806"]
 
 [node name="SoundManager" type="Node"]
 script = ExtResource("1_kcf2j")
@@ -30,3 +31,6 @@ volume_db = -8.914
 stream = ExtResource("6_66abv")
 
 [node name="MetalHit" type="AudioStreamPlayer" parent="."]
+
+[node name="EnemyBulletSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_5l806")

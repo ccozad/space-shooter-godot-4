@@ -4,9 +4,13 @@ extends Node
 @onready var explosion_sound: AudioStreamPlayer = $ExplosionSound
 @onready var rock_hit_sound = [$RockHit, $RockHit2, $RockHit3]
 @onready var metal_hit_sound: AudioStreamPlayer = $MetalHit
+@onready var enemy_bullet_sound: AudioStreamPlayer = $EnemyBulletSound
 
 func fire_bullet():
 	bullet_sound.play()
+
+func fire_enemy_bullet():
+	enemy_bullet_sound.play()
 
 func explode():
 	explosion_sound.play()

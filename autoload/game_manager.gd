@@ -79,7 +79,7 @@ func fire_player_weapon(root_node):
 			var bullet = BULLET.instantiate()
 			bullet.init(weapon)
 			root_node.add_child(bullet)
-	SoundManager.fire_bullet()
+			SoundManager.fire_bullet()
 
 func create_explosion(root_node, source_node, width, height):
 	var explosion = EXPLOSION.instantiate()
@@ -125,3 +125,4 @@ func fire_enemy_weapon(root_node, enemy, event):
 				var bullet = event.fire.shot.instantiate()
 				bullet.init(weapon, enemy.rotation.y)
 				root_node.add_child(bullet)
+				SoundManager.fire_enemy_bullet()
