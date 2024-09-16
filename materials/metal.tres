@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=2]
+[ext_resource path="metal_orm.png" type="Texture" id=2]
+[ext_resource path="metal_normal.png" type="Texture" id=3]
+[resource]
+albedo_color = Color(0.725396, 0.691424, 0.579367, 1)
+metallic = 1
+roughness = 1
+roughness_texture = ExtResource( 2 )
+roughness_texture_channel = 1
+normal_enabled = true
+normal_scale = 1
+normal_texture = ExtResource( 3 )
+
+
+
