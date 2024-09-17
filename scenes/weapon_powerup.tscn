@@ -39,7 +39,9 @@ shadow_mesh = SubResource("ArrayMesh_vv1g4")
 radius = 0.9
 
 [node name="weapon_powerup" type="Area3D"]
+collision_layer = 32
 script = ExtResource("1_xfu0w")
+activate_side_weapons = true
 
 [node name="Text" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0079841, 0, 0.128281)

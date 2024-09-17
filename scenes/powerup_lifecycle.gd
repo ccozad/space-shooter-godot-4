@@ -1,0 +1,31 @@
+class_name PowerupLifecycle
+extends Node
+
+var current_direction
+var current_rotation
+var mesh_instance
+var emission_energy_multiplier = 1.0
+var emission_change_direction = 0.0
+
+func init(powerup):
+	current_direction = Vector3(0, 0, 2.0)
+	current_rotation = Vector3(0, 0, 2.0)
+	powerup.scale_object_local(Vector3(4,4,4))
+	for mesh in powerup.get_children():
+		if mesh is MeshInstance3D:
+			mesh_instance = mesh_instance
+	
+	set_emission(emission_energy_multiplier)
+
+func process(node, delta):
+	node.global_translate(current_direction * delta)
+	node.rotate_z(current_rotation.z * delta)
+	emission_energy_multiplier += emission_change_direction * delta / 2.0
+	if emission_energy_multiplier < 0 or emission_energy_multiplier > 0.1:
+		emission_change_direction = -emission_change_direction
+	set_emission(emission_energy_multiplier)
+	if node.position.z > GameManager.boundary.bottom + GameManager.boundary_margin:
+		node.queue_free()
+	
+func set_emission(emission):
+	mesh_instance.get_active_material(0).emission_energy_multiplier = emission

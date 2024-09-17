@@ -1,11 +1,15 @@
+class_name Powerup
 extends Area3D
 
+var lifecycle = PowerupLifecycle.new()
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+@export var shield_boost = 0.0
+@export var activate_side_weapons = false
 
+func init(enemy):
+	position = enemy.global_position
+	lifecycle.init(self)
+	enemy.powerup = null
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _process(delta):
+	lifecycle.process(self, delta)

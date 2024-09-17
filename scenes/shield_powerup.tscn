@@ -39,7 +39,9 @@ shadow_mesh = SubResource("ArrayMesh_nb1oo")
 radius = 0.9
 
 [node name="shield_powerup" type="Area3D"]
+collision_layer = 32
 script = ExtResource("1_3lnat")
+shield_boost = 20.0
 
 [node name="Text_001" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0184822, -7.54139e-06, 0.0349401)
