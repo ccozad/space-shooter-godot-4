@@ -25,6 +25,8 @@ func init(root_node, enemy, _spawn, _timeline):
 	current_rotation = spawn.rotation
 	hit_points = spawn.hit_points
 	max_hit_points = hit_points
+	if spawn.has("powerup"):
+		enemy.powerup = spawn.powerup
 	connect("enemy_destroyed", Callable(root_node, "_on_enemy_destroyed"))
 	connect("bullet_hit", Callable(root_node, "_on_show_hit_effect"))
 	connect("weapon_fired", Callable(root_node, "_on_weapon_fired"))

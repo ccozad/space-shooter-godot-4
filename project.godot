@@ -46,6 +46,7 @@ bullet=""
 modules=""
 metal=""
 enemy_bullet=""
+powerups=""
 
 [input]
 

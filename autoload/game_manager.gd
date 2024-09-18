@@ -91,6 +91,8 @@ func create_explosion(root_node, source_node, width, height):
 		speed)
 	root_node.add_child(explosion)
 	SoundManager.explode()
+	if source_node is Enemy:
+		spawn_powerup(root_node, source_node)
 	if source_node.is_in_group("modules"):
 		for module in Utils.get_all_children(source_node):
 			if module is MeshInstance3D:
@@ -126,3 +128,11 @@ func fire_enemy_weapon(root_node, enemy, event):
 				bullet.init(weapon, enemy.rotation.y)
 				root_node.add_child(bullet)
 				SoundManager.fire_enemy_bullet()
+
+func spawn_powerup(root_node, enemy):
+	var powerup_scene = enemy.powerup
+	if powerup_scene != null:
+		var powerup = powerup_scene.instantiate()
+		powerup.init(enemy)
+		root_node.add_child(powerup)
+		

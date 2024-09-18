@@ -13,7 +13,7 @@ func init(powerup):
 	powerup.scale_object_local(Vector3(4,4,4))
 	for mesh in powerup.get_children():
 		if mesh is MeshInstance3D:
-			mesh_instance = mesh_instance
+			mesh_instance = mesh
 	
 	set_emission(emission_energy_multiplier)
 
@@ -28,4 +28,4 @@ func process(node, delta):
 		node.queue_free()
 	
 func set_emission(emission):
-	mesh_instance.get_active_material(0).emission_energy_multiplier = emission
+		mesh_instance.get_active_material(0).emission_energy_multiplier = emission

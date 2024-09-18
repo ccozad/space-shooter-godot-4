@@ -26,6 +26,10 @@ func init():
 			weapon.active = true
 		weapons.append(weapon)
 
+func activate_all_weapons():
+	for weapon in weapons:
+		weapon.active = true
+
 func _input(event):
 	shift_pressed = true if Input.is_action_pressed("accelerate") else false
 
@@ -68,6 +72,10 @@ func _physics_process(delta: float) -> void:
 		tilt = clamp(tilt, -MAX_TILT, MAX_TILT)
 	move_and_slide()
 
+func activate_shield():
+	shield_collision.set_deferred("enabledd", true)
+	shield.visible = true
+
 func shield_hit(value):
 	shield_power -= value
 	
@@ -76,6 +84,16 @@ func remove_shield():
 	shield_collision.set_deferred("disabled", true)
 	shield.visible = false
 
+func process_powerup(powerup):
+	if powerup.shield_boost:
+		if shield_power == 0:
+			activate_shield()
+		shield_power = clampf(shield_power + powerup.shield_boost, 0, max_shield_power)
+	if powerup.activate_side_weapons:
+		activate_all_weapons()
+	update_hud.emit()
+	powerup.queue_free()
+	
 func process_hit(area, enemy_impact):
 	var value = get_hit_points(area, enemy_impact)
 	if shield_power > 0:
@@ -103,9 +121,11 @@ func get_hit_points(area, enemy_impact):
 func _on_area_3d_area_entered(area: Area3D) -> void:
 	var bullet_impact = area.is_in_group("enemy_bullet")
 	var enemy_impact = area.is_in_group("enemy")
+	var powerup_impact = area.is_in_group("powerups")
 	if bullet_impact or enemy_impact:
 		process_hit(area, enemy_impact)
-
+	elif powerup_impact:
+		process_powerup(area)
 
 func _on_shield_area_entered(area: Area3D) -> void:
 	var bullet_impact = area.is_in_group("enemy_bullet")

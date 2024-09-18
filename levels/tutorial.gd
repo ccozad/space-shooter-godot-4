@@ -3,6 +3,8 @@ extends Node
 var ASTEROID = preload("res://scenes/asteroid.tscn")
 var ENEMY_BULLET = preload("res://scenes/enemy_bullet.tscn")
 var ENEMY_SHIP_1 = preload("res://scenes/enemy_ship_1.tscn")
+var SHIELD_POWERUP = preload("res://scenes/shield_powerup.tscn")
+var WEAPON_POWERUP = preload("res://scenes/weapon_powerup.tscn")
 
 var timeline = []
 var elapsed_time = 0.0
@@ -33,6 +35,7 @@ func process_wave(node, wave):
 
 func get_asteroid_wave():
 	var wave = []
+	var powerup_index = int(randf_range(0, 10))
 	for i in 11:
 		wave.append({
 			"enemy": ASTEROID,
@@ -41,7 +44,8 @@ func get_asteroid_wave():
 				"coords": Vector3(Utils.get_random_x_in_viewport(10), 0, GameManager.boundary.top - i * 2),
 				"scale": Utils.get_random_vector3_in_range(1, 4),
 				"direction": Vector3(0, 0, randf_range(5, 15)),
-				"rotation": Utils.get_random_vector3_in_range(0.1, 1)
+				"rotation": Utils.get_random_vector3_in_range(0.1, 1),
+				"powerup": SHIELD_POWERUP if i == powerup_index else null
 			},
 			"timeline": []
 		})
@@ -49,6 +53,7 @@ func get_asteroid_wave():
 
 func get_enemy_ship_wave():
 		var wave = []
+		var powerup_index = int(randf_range(0, 4))
 		for i in 5:
 			wave.append({
 				"enemy": ENEMY_SHIP_1,
@@ -57,7 +62,8 @@ func get_enemy_ship_wave():
 					"coords": Vector3(-50 + i * 30, 0, GameManager.boundary.top + 1),
 					"scale": Vector3(2, 2, 2),
 					"direction": Vector3(0, 0, 2.0),
-					"rotation": Vector3(0, 0, 0)
+					"rotation": Vector3(0, 0, 0),
+					"powerup": WEAPON_POWERUP if i == powerup_index else null
 				},
 				"timeline": get_enemy_ship_timeline()
 			})
