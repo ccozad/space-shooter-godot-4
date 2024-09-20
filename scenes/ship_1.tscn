@@ -208,14 +208,14 @@ linear_accel_max = 10.0
 scale_min = 0.1
 scale_max = 0.7
 
-[sub_resource type="Gradient" id="Gradient_jj86m"]
+[sub_resource type="Gradient" id="Gradient_8wfcx"]
 offsets = PackedFloat32Array(0.114035, 0.929825)
 colors = PackedColorArray(0.996078, 1, 0, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_2y6e7"]
-gradient = SubResource("Gradient_jj86m")
+gradient = SubResource("Gradient_8wfcx")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dkdkh"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v3p1c"]
 transparency = 1
 blend_mode = 1
 shading_mode = 0
@@ -229,7 +229,7 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_3xqxl"]
-material = SubResource("StandardMaterial3D_dkdkh")
+material = SubResource("StandardMaterial3D_v3p1c")
 
 [node name="ship_1" type="CharacterBody3D" groups=["modules"]]
 collision_mask = 16

@@ -3,6 +3,7 @@ extends Node
 var ASTEROID = preload("res://scenes/asteroid.tscn")
 var ENEMY_BULLET = preload("res://scenes/enemy_bullet.tscn")
 var ENEMY_SHIP_1 = preload("res://scenes/enemy_ship_1.tscn")
+var ROCKET = preload("res://scenes/rocket.tscn")
 var SHIELD_POWERUP = preload("res://scenes/shield_powerup.tscn")
 var WEAPON_POWERUP = preload("res://scenes/weapon_powerup.tscn")
 
@@ -13,7 +14,8 @@ var previous_second = 0
 func init(node):
 	timeline.append({"timestamp": 1, "wave": get_asteroid_wave()})
 	timeline.append({"timestamp": 3, "wave": get_enemy_ship_wave()})
-	timeline.append({"timestamp": 7, "wave": get_asteroid_wave()})
+	timeline.append({"timestamp": 6, "wave": get_rocket_wave()})
+	timeline.append({"timestamp": 8, "wave": get_asteroid_wave()})
 	timeline.append({"timestamp": 12, "wave": get_enemy_ship_wave()})
 	print("tutorial scene initialized")
 
@@ -68,6 +70,23 @@ func get_enemy_ship_wave():
 				"timeline": get_enemy_ship_timeline()
 			})
 		return wave
+		
+func get_rocket_wave():
+	var wave = []
+	for i in 2:
+		wave.append({
+			"enemy": ROCKET,
+			"spawn": {
+				"hit_points": 10,
+				"coords": Vector3(-50 + i * 100, 0, GameManager.boundary.top + 1),
+				"scale": Vector3(0.75, 0.75, 0.75),
+				"direction": Vector3(0, 0, 20.0),
+				"rotation": Vector3(0, 0, 0),
+				"target": GameManager.player
+			},
+			"timeline": []
+		})
+	return wave
 
 func get_enemy_ship_timeline():
 	return [

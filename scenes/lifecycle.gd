@@ -14,6 +14,7 @@ var max_hit_points = 0.0
 var hit_points = 0.0
 var timeline = []
 var previous_second = 0.0
+var target
 
 func init(root_node, enemy, _spawn, _timeline):
 	spawn = _spawn
@@ -27,6 +28,8 @@ func init(root_node, enemy, _spawn, _timeline):
 	max_hit_points = hit_points
 	if spawn.has("powerup"):
 		enemy.powerup = spawn.powerup
+	if spawn.has("target"):
+		target = spawn.target
 	connect("enemy_destroyed", Callable(root_node, "_on_enemy_destroyed"))
 	connect("bullet_hit", Callable(root_node, "_on_show_hit_effect"))
 	connect("weapon_fired", Callable(root_node, "_on_weapon_fired"))
@@ -39,8 +42,15 @@ func process(enemy, delta):
 			if event.timestamp <= elapsed_time and not event.has("processed"):
 				process_event(enemy, event)
 				event.processed = true
-	enemy.global_position.x += current_direction.x * delta
-	enemy.global_position.z += current_direction.z * delta
+	if Utils.is_valid_node(target):
+		var to_target = target.global_position - enemy.global_position
+		current_direction = to_target.normalized() * speed
+		var direction_angle = Vector2(to_target.x, to_target.z).angle_to(Vector2.UP)
+		enemy.rotation.y = direction_angle
+		enemy.global_position = enemy.global_position.move_toward(target.global_position, delta * speed)
+	else:
+		enemy.global_position.x += current_direction.x * delta
+		enemy.global_position.z += current_direction.z * delta
 	
 	if current_rotation != Vector3.ZERO:
 		enemy.rotate_x(current_rotation.x * delta)
