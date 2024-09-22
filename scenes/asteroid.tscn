@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://bn1gotyhjhlcm"]
+[gd_scene load_steps=7 format=4 uid="uid://b3jfeotll1xrd"]
 
 [ext_resource type="Script" path="res://scenes/enemy.gd" id="1_hi2m3"]
 [ext_resource type="Material" path="res://materials/asteroid.tres" id="1_l7886"]

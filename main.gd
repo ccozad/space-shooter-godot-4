@@ -2,7 +2,7 @@ extends Node3D
 
 @onready var ship_1: CharacterBody3D = $ship_1
 @onready var debug: Label = $Debug
-@onready var hud: CanvasLayer = $Hud
+@onready var hud:HUD = $Hud
 @onready var camera: Camera3D = $Camera3D
 
 
@@ -25,6 +25,7 @@ func _ready() -> void:
 	ship_1.connect("update_hud", Callable(self, "_on_update_hud"))
 	ship_1.init()
 	GameManager.set_player(ship_1)
+	hud.hide_boss_section()
 	debug.init(ship_1)
 
 

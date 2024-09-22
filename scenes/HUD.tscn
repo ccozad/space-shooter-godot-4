@@ -38,3 +38,40 @@ text = "Shield Power:"
 layout_mode = 2
 size_flags_horizontal = 3
 value = 100.0
+
+[node name="Boss" type="MarginContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -330.0
+offset_bottom = 68.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+
+[node name="GridContainer" type="GridContainer" parent="Boss"]
+layout_mode = 2
+columns = 2
+
+[node name="BossHullIntegrityLabel" type="Label" parent="Boss/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_yiw2r")
+theme_override_font_sizes/font_size = 20
+text = "Hull Integrity: "
+
+[node name="BossHullIntegrityPowerBar" type="ProgressBar" parent="Boss/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+value = 100.0
+
+[node name="BossSheildPowerLabel" type="Label" parent="Boss/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_yiw2r")
+theme_override_font_sizes/font_size = 20
+text = "Shield Power:"
+
+[node name="BossShieldPowerBar" type="ProgressBar" parent="Boss/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+value = 100.0

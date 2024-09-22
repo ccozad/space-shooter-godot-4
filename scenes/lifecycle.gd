@@ -1,6 +1,7 @@
 class_name Lifecycle
 extends Node
 
+signal enemy_spawned(source_node)
 signal enemy_destroyed(source_node)
 signal bullet_hit(enemy, bullet)
 signal weapon_fired(enemy, event)
@@ -35,6 +36,8 @@ func init(root_node, enemy, _spawn, _timeline):
 	connect("weapon_fired", Callable(root_node, "_on_weapon_fired"))
 
 func process(enemy, delta):
+	if elapsed_time == 0.0:
+		enemy_spawned.emit(enemy)
 	elapsed_time += delta
 	if elapsed_time - previous_second > 1.0:
 		previous_second+= 1
