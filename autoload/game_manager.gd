@@ -16,6 +16,15 @@ var boundary = {
 var boundary_margin = 10.0
 var player
 var camera
+var mouse_captured = false
+
+func capture_mouse():
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	mouse_captured = true
+
+func release_mouse():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	mouse_captured = false
 
 func set_player(_player):
 	player = _player
