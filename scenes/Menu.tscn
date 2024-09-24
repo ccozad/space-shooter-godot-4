@@ -1,13 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://ca72os556nlpp"]
+[gd_scene load_steps=4 format=3 uid="uid://ca72os556nlpp"]
 
-[ext_resource type="Script" path="res://scenes/menu.gd" id="1_ebjqr"]
-[ext_resource type="Environment" uid="uid://bgsr6s7o877ta" path="res://world_environment.tres" id="2_rmed4"]
+[ext_resource type="Script" path="res://scenes/menu.gd" id="1_jn4l1"]
+[ext_resource type="Environment" uid="uid://bgsr6s7o877ta" path="res://world_environment.tres" id="2_0k6ba"]
+[ext_resource type="FontFile" uid="uid://dfvkq8aj67fa2" path="res://fonts/futurespore.regular.ttf" id="3_jklkf"]
 
 [node name="Menu" type="Node3D"]
-script = ExtResource("1_ebjqr")
+script = ExtResource("1_jn4l1")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource("2_rmed4")
+environment = ExtResource("2_0k6ba")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, -6.97574e-16, -1.5246e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 2.08165e-12, 25, 2.08165e-12)
@@ -16,3 +17,34 @@ light_cull_mask = 4294966783
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, -6.97574e-16, -1.5246e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 2.08165e-12, 130, 2.08165e-12)
 fov = 30.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -178.5
+offset_top = -114.0
+offset_right = 178.5
+offset_bottom = 114.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartButton" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_jklkf")
+theme_override_font_sizes/font_size = 64
+text = "Start
+"
+
+[node name="ExitButton" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_jklkf")
+theme_override_font_sizes/font_size = 64
+text = "Exit"
+
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

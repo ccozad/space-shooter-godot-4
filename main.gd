@@ -28,6 +28,10 @@ func _ready() -> void:
 	hud.hide_boss_section()
 	debug.init(ship_1)
 
+func _input(event):
+	if Input.is_action_just_pressed("main_menu"):
+		GameManager.release_mouse()
+		get_tree().change_scene_to_file("res://scenes/menu.tscn")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
