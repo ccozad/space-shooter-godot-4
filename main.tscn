@@ -4,10 +4,8 @@
 [ext_resource type="Script" path="res://main.gd" id="1_qjydq"]
 [ext_resource type="PackedScene" uid="uid://i25aas33a7am" path="res://scenes/HUD.tscn" id="2_sp3qy"]
 [ext_resource type="PackedScene" uid="uid://bdp5nd7vu83tn" path="res://scenes/ship_1.tscn" id="3_wmjkf"]
-[ext_resource type="PackedScene" uid="uid://c2r2uug0o8xbm" path="res://scenes/boundary.tscn" id="5_fr5dm"]
-
-[sub_resource type="Environment" id="Environment_otv2b"]
-background_mode = 1
+[ext_resource type="PackedScene" uid="uid://b8qojfq0ay2rd" path="res://scenes/boundary.tscn" id="5_fr5dm"]
+[ext_resource type="Environment" uid="uid://bgsr6s7o877ta" path="res://world_environment.tres" id="6_3lflp"]
 
 [node name="MainRoot" type="Node3D"]
 script = ExtResource("1_qjydq")
@@ -42,4 +40,4 @@ metadata/_edit_use_anchors_ = true
 [node name="Boundary" parent="." instance=ExtResource("5_fr5dm")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_otv2b")
+environment = ExtResource("6_3lflp")
