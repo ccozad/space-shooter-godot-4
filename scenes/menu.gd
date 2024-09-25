@@ -1,14 +1,24 @@
 extends Node3D
 
+@onready var camera: Camera3D = $Camera3D
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	GameManager.release_mouse()
+	GameManager.set_boundary(
+		$"Boundary/LeftWall".position.x,
+		$"Boundary/RightWall".position.x,
+		$"Boundary/TopWall".position.z,
+		$"Boundary/BottomWall".position.z
+	)
+	GameManager.set_camera(camera)
+	GameManager.spawn_stars(self)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	GameManager.process_background(self, delta)
 
 
 func _on_start_button_pressed() -> void:
