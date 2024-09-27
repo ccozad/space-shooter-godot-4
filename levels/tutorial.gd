@@ -6,12 +6,27 @@ var ENEMY_SHIP_1 = preload("res://scenes/enemy_ship_1.tscn")
 var ROCKET = preload("res://scenes/rocket.tscn")
 var SHIELD_POWERUP = preload("res://scenes/shield_powerup.tscn")
 var WEAPON_POWERUP = preload("res://scenes/weapon_powerup.tscn")
+var BULLET = preload("res://scenes/bullet.tscn")
+var EXPLOSION = preload("res://scenes/explosion.tscn")
+var HIT_EFFECT = preload("res://scenes/hit_effect.tscn")
 
 var timeline = []
 var elapsed_time = 0.0
 var previous_second = 0
 
-func init(node):
+func init(node, more_scenes = []):
+	var scenes = [
+		ASTEROID, 
+		ENEMY_BULLET, 
+		ENEMY_SHIP_1, 
+		ROCKET, 
+		SHIELD_POWERUP, 
+		WEAPON_POWERUP,
+		BULLET,
+		EXPLOSION,
+		HIT_EFFECT]
+	scenes.append_array(more_scenes)
+	LevelManager.compile_shaders(node, scenes)
 	timeline.append({"timestamp": 1, "wave": get_asteroid_wave()})
 	timeline.append({"timestamp": 3, "wave": get_enemy_ship_wave()})
 	timeline.append({"timestamp": 6, "wave": get_rocket_wave()})

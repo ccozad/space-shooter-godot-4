@@ -26,7 +26,7 @@ func get_all_materials_from_scene(scenes):
 	return materials
 
 func get_all_materials(source_node):
-	var materials
+	var materials = []
 	for child in get_all_children(source_node):
 		if child is MeshInstance3D:
 			var mesh: MeshInstance3D = child as MeshInstance3D
@@ -43,7 +43,7 @@ func get_all_materials(source_node):
 		
 		if child is CPUParticles3D:
 			var particle: CPUParticles3D = child as CPUParticles3D
-			var material = particle.draw_pass_1.surface_get_material(0)
+			var material = particle.mesh.surface_get_material(0)
 			if material != null and is_instance_valid(material):
 				materials.append(material)
 		

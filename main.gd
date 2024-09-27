@@ -1,15 +1,20 @@
 extends Node3D
 
+const SHIP_1 = preload("res://scenes/ship_1.tscn")
+
 @onready var ship_1: CharacterBody3D = $ship_1
 @onready var debug: Label = $Debug
 @onready var hud:HUD = $Hud
 @onready var camera: Camera3D = $Camera3D
+@onready var loading_label: Label = $LoadingLabel
 
 
 var fire_cadence = 0.2
 var fire_cooldown = 0.0
 var current_level
 var level_loaded = false
+var level_loading = false
+var thread
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -42,10 +47,19 @@ func _process(delta: float) -> void:
 		if Input.is_action_pressed("shoot_primary") and fire_cooldown <= 0:
 			fire_bullet()
 		fire_cooldown -= delta
-	else:
-		current_level = LevelManager.load_level("tutorial")
-		current_level.init(self)
-		level_loaded = true
+	elif not level_loading:
+		thread = Thread.new()
+		thread.start(Callable(self, "load_level").bind("tutorial"))
+
+func load_level(level_name):
+	Thread.set_thread_safety_checks_enabled(false)
+	level_loading = true
+	current_level = LevelManager.load_level(level_name)
+	current_level.init(self, [SHIP_1])
+	level_loaded = true
+	level_loading = false
+	thread.call_deferred("wait_for_finish")
+	loading_label.visible = false
 
 func fire_bullet():
 	if Utils.is_valid_node(ship_1):
@@ -66,3 +80,7 @@ func _on_update_hud():
 
 func _on_weapon_fired(enemy, event):
 	GameManager.fire_enemy_weapon(self, enemy, event)
+
+func _exit_tree() -> void:
+	if thread.is_alive():
+		thread.wait_for_finish()

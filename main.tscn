@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ciqveskdwgoqq"]
+[gd_scene load_steps=8 format=3 uid="uid://ciqveskdwgoqq"]
 
 [ext_resource type="PackedScene" uid="uid://w8xwlohjkodl" path="res://scenes/debug.tscn" id="1_fpxtt"]
 [ext_resource type="Script" path="res://main.gd" id="1_qjydq"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bdp5nd7vu83tn" path="res://scenes/ship_1.tscn" id="3_wmjkf"]
 [ext_resource type="PackedScene" uid="uid://b8qojfq0ay2rd" path="res://scenes/boundary.tscn" id="5_fr5dm"]
 [ext_resource type="Environment" uid="uid://bgsr6s7o877ta" path="res://world_environment.tres" id="6_3lflp"]
+[ext_resource type="FontFile" uid="uid://dfvkq8aj67fa2" path="res://fonts/futurespore.regular.ttf" id="7_udgpd"]
 
 [node name="MainRoot" type="Node3D"]
 script = ExtResource("1_qjydq")
@@ -36,8 +37,25 @@ metadata/_edit_use_anchors_ = true
 [node name="Hud" parent="." instance=ExtResource("2_sp3qy")]
 
 [node name="ship_1" parent="." instance=ExtResource("3_wmjkf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 23.9644)
 
 [node name="Boundary" parent="." instance=ExtResource("5_fr5dm")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("6_3lflp")
+
+[node name="LoadingLabel" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.5
+offset_top = -11.5
+offset_right = 37.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("7_udgpd")
+theme_override_font_sizes/font_size = 64
+text = "Loading..."
