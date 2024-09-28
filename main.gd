@@ -7,7 +7,8 @@ const SHIP_1 = preload("res://scenes/ship_1.tscn")
 @onready var hud:HUD = $Hud
 @onready var camera: Camera3D = $Camera3D
 @onready var loading_label: Label = $LoadingLabel
-
+@onready var pause_box: VBoxContainer = $PauseBox
+@onready var world_environment: WorldEnvironment = $WorldEnvironment
 
 var fire_cadence = 0.2
 var fire_cooldown = 0.0
@@ -15,9 +16,11 @@ var current_level
 var level_loaded = false
 var level_loading = false
 var thread
+var global_time = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	pause_box.visible = false
 	GameManager.set_boundary(
 		$"Boundary/LeftWall".position.x,
 		$"Boundary/RightWall".position.x,
@@ -25,6 +28,7 @@ func _ready() -> void:
 		$"Boundary/BottomWall".position.z
 	)
 	GameManager.set_camera(camera)
+	GameManager.set_world_environment(world_environment)
 	GameManager.spawn_stars(self)
 	ship_1.connect("player_destroyed", Callable(self, "_on_player_destroyed"))
 	ship_1.connect("update_hud", Callable(self, "_on_update_hud"))
@@ -37,10 +41,25 @@ func _input(event):
 	if Input.is_action_just_pressed("main_menu"):
 		GameManager.release_mouse()
 		get_tree().change_scene_to_file("res://scenes/menu.tscn")
+	
+	if Input.is_action_just_pressed("pause_game"):
+		pause_game()
+
+func _notification(what):
+	if what == MainLoop.NOTIFICATION_APPLICATION_FOCUS_OUT:
+		pause_game()
+
+func pause_game():
+	pause_box.visible = true
+	GameManager.set_pause_environment()
+	get_tree().paused = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if level_loaded:
+		pause_box.visible = get_tree().paused
+		global_time += delta
+		RenderingServer.global_shader_parameter_set("global_time", global_time)
 		GameManager.process_background(self, delta)
 		GameManager.process_debris(delta)
 		current_level.process(self, delta)

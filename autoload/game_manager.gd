@@ -16,6 +16,7 @@ var boundary = {
 var boundary_margin = 10.0
 var player
 var camera
+var world_environment
 var mouse_captured = false
 
 func capture_mouse():
@@ -32,6 +33,9 @@ func set_player(_player):
 func set_camera(_camera):
 	camera = _camera
 
+func set_world_environment(_world_environment):
+	world_environment = _world_environment
+
 func set_boundary(left, right, top, bottom):
 	boundary.left = left
 	boundary.right = right
@@ -44,6 +48,13 @@ func is_in_boundary(node, add_margin = true):
 		and node.global_position.x < boundary.right + margin
 		and node.global_position.z > boundary.top - margin
 		and node.global_position.z < boundary.bottom + margin)
+
+func set_pause_environment():
+	world_environment.environment.volumetric_fog_enabled = true
+	world_environment.environment.volumetric_fog_albedo = Color("#292929")
+
+func clear_pause_environment():
+	world_environment.environment.volumetric_fog_enabled = false
 
 func to_2D(vector3):
 	return camera.unproject_position(vector3)
