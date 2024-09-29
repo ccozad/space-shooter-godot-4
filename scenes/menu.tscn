@@ -42,6 +42,12 @@ theme_override_font_sizes/font_size = 64
 text = "Start
 "
 
+[node name="SettingsButton" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_jklkf")
+theme_override_font_sizes/font_size = 64
+text = "Settings"
+
 [node name="ExitButton" type="Button" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_jklkf")
@@ -54,4 +60,5 @@ text = "Exit"
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -36.2169, -11.4205, -16.9742)
 
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

@@ -46,3 +46,5 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_ye0b1")
 theme_override_font_sizes/font_size = 40
 text = "Back"
+
+[connection signal="pressed" from="CanvasLayer/BackContainer/BackButton" to="." method="_on_back_button_pressed"]
