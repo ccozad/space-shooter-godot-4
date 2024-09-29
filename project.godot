@@ -21,6 +21,7 @@ Utils="*res://autoload/utils.gd"
 GameManager="*res://autoload/game_manager.gd"
 SoundManager="*res://autoload/sound_manager.tscn"
 LevelManager="*res://autoload/level_manager.gd"
+OptionsManager="*res://autoload/options_manager.gd"
 
 [display]
 

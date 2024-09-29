@@ -37,7 +37,7 @@ func _ready() -> void:
 	hud.hide_boss_section()
 	debug.init(ship_1)
 
-func _input(event):
+func _input(_event):
 	if Input.is_action_just_pressed("main_menu"):
 		GameManager.release_mouse()
 		get_tree().change_scene_to_file("res://scenes/menu.tscn")
@@ -77,7 +77,7 @@ func load_level(level_name):
 	current_level.init(self, [SHIP_1])
 	level_loaded = true
 	level_loading = false
-	thread.call_deferred("wait_for_finish")
+	thread.call_deferred("wait_to_finish")
 	loading_label.visible = false
 
 func fire_bullet():
@@ -102,4 +102,4 @@ func _on_weapon_fired(enemy, event):
 
 func _exit_tree() -> void:
 	if thread.is_alive():
-		thread.wait_for_finish()
+		thread.wait_to_finish()

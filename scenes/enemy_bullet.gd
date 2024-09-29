@@ -1,6 +1,5 @@
 extends Area3D
 
-
 var current_direction
 @export var hit_points = 10.0
 @export var speed = 20.0

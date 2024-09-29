@@ -30,7 +30,7 @@ func activate_all_weapons():
 	for weapon in weapons:
 		weapon.active = true
 
-func _input(event):
+func _input(_event):
 	shift_pressed = true if Input.is_action_pressed("accelerate") else false
 
 func _physics_process(delta: float) -> void:

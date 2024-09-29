@@ -7,7 +7,6 @@ var fire_height
 var fire_speed
 var fire_aperature = 0
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	fire.mesh.size = Vector2(fire_width, fire_height)

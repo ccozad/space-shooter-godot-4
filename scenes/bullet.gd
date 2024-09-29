@@ -2,7 +2,6 @@ extends Area3D
 
 @onready var trail: Line2D = $Trail
 
-
 var current_direction
 @export var hit_points = 10.0
 @export var speed = 150.0
