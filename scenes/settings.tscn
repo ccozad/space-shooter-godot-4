@@ -63,9 +63,7 @@ offset_top = -40.0
 offset_right = 22.5
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 30
 
 [node name="BackButton" type="Button" parent="CanvasLayer/BackContainer"]
