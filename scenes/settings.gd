@@ -2,6 +2,11 @@ extends Node3D
 
 @onready var window_size_option_button: OptionButton = $CanvasLayer/OptionsContainer/WindowSizeOptionButton
 @onready var full_screen_button: CheckButton = $CanvasLayer/OptionsContainer/FullScreenButton
+@onready var gamma_label: Label = $CanvasLayer/OptionsContainer/GammaLabel
+@onready var gamma_slider: HSlider = $CanvasLayer/OptionsContainer/GammaSlider
+@onready var asteroid: Enemy = $asteroid
+@onready var enemy_ship: Enemy = $enemy_ship
+@onready var world_environment: WorldEnvironment = $WorldEnvironment
 
 var options
 
@@ -20,6 +25,9 @@ func _ready():
 			if width_matches and height_matches:
 				window_size_option_button.select(index)
 			index += 1
+	gamma_slider.value = options.tonemap_exposure if options.has("tonemap_exposure") else 1.0
+	spawn_asteroid()
+	spawn_enemy_ship()
 
 func _on_back_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/menu.tscn")
@@ -36,3 +44,28 @@ func _on_full_screen_button_toggled(toggled_on: bool) -> void:
 	OptionsManager.write_options(options)
 	OptionsManager.set_window_mode()
 	OptionsManager.resize_window()
+
+func _on_gamma_slider_value_changed(value: float) -> void:
+	options.tonemap_exposure = gamma_slider.value
+	OptionsManager.write_options(options)
+	world_environment.environment.tonemap_exposure = options.tonemap_exposure
+
+func spawn_asteroid():
+	var spawn = {
+		"hit_points": 20.0,
+		"coords": Vector3.ZERO,
+		"scale": Vector3(5,5,5),
+		"direction": Vector3.ZERO,
+		"rotation": Utils.get_random_vector3_in_range(0.1, 1.0)
+	}
+	asteroid.init(self, spawn, [])
+
+func spawn_enemy_ship():
+	var spawn = {
+		"hit_points": 20.0,
+		"coords": Vector3.ZERO,
+		"scale": Vector3(5,5,5),
+		"direction": Vector3.ZERO,
+		"rotation": Vector3(0, 0, 0.8)
+	}
+	enemy_ship.init(self, spawn, [])
