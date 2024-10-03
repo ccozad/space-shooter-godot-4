@@ -7,6 +7,9 @@ extends Node3D
 @onready var asteroid: Enemy = $asteroid
 @onready var enemy_ship: Enemy = $enemy_ship
 @onready var world_environment: WorldEnvironment = $WorldEnvironment
+@onready var master_volume_slider: HSlider = $CanvasLayer/OptionsContainer/MasterVolumeSlider
+@onready var music_volume_slider: HSlider = $CanvasLayer/OptionsContainer/MusicVolumeSlider
+@onready var sound_effects_volume_slider: HSlider = $CanvasLayer/OptionsContainer/SoundEffectsVolumeSlider
 
 var options
 
@@ -26,6 +29,9 @@ func _ready():
 				window_size_option_button.select(index)
 			index += 1
 	gamma_slider.value = options.tonemap_exposure if options.has("tonemap_exposure") else 1.0
+	master_volume_slider.value = options.master_volume if options.has("master_volume") else 1.0
+	music_volume_slider.value = options.music_volume if options.has("music_volume") else 1.0
+	sound_effects_volume_slider.value = options.sound_effects_volume if options.has("sound_effects_volume") else 1.0
 	spawn_asteroid()
 	spawn_enemy_ship()
 
@@ -49,6 +55,21 @@ func _on_gamma_slider_value_changed(value: float) -> void:
 	options.tonemap_exposure = gamma_slider.value
 	OptionsManager.write_options(options)
 	world_environment.environment.tonemap_exposure = options.tonemap_exposure
+
+func _on_master_volume_slider_value_changed(value: float) -> void:
+	options.master_volume = value
+	OptionsManager.write_options(options)
+	SoundManager.set_master_volume(value)
+
+func _on_music_volume_slider_value_changed(value: float) -> void:
+	options.music_volume = value
+	OptionsManager.write_options(options)
+	SoundManager.set_music_volume(value)
+
+func _on_sound_effects_volume_slider_value_changed(value: float) -> void:
+	options.sound_effects_volume = value
+	OptionsManager.write_options(options)
+	SoundManager.set_sound_effects_volume(value)
 
 func spawn_asteroid():
 	var spawn = {

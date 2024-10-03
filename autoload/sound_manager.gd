@@ -6,6 +6,24 @@ extends Node
 @onready var metal_hit_sound: AudioStreamPlayer = $MetalHit
 @onready var enemy_bullet_sound: AudioStreamPlayer = $EnemyBulletSound
 
+var master_bus
+var music_bus
+var sound_effects_bus
+
+func _ready():
+	master_bus = AudioServer.get_bus_index("Master")
+	music_bus = AudioServer.get_bus_index("Music")
+	sound_effects_bus = AudioServer.get_bus_index("SoundEffects")
+
+func set_master_volume(value):
+	AudioServer.set_bus_volume_db(master_bus, linear_to_db(value))
+
+func set_music_volume(value):
+	AudioServer.set_bus_volume_db(music_bus, linear_to_db(value))
+
+func set_sound_effects_volume(value):
+	AudioServer.set_bus_volume_db(sound_effects_bus, linear_to_db(value))
+
 func fire_bullet():
 	bullet_sound.play()
 

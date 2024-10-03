@@ -14,23 +14,30 @@ script = ExtResource("1_kcf2j")
 [node name="BulletSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_cuaju")
 volume_db = -10.306
+bus = &"SoundEffects"
 
 [node name="ExplosionSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_obdrr")
 volume_db = -7.924
+bus = &"SoundEffects"
 
 [node name="RockHit" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_rrp1s")
 volume_db = -8.914
+bus = &"SoundEffects"
 
 [node name="RockHit2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_pdakx")
 volume_db = -8.914
+bus = &"SoundEffects"
 
 [node name="RockHit3" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_66abv")
+bus = &"SoundEffects"
 
 [node name="MetalHit" type="AudioStreamPlayer" parent="."]
+bus = &"SoundEffects"
 
 [node name="EnemyBulletSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_5l806")
+bus = &"SoundEffects"
