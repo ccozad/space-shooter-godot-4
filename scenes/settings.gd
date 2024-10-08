@@ -38,6 +38,9 @@ func _ready():
 func _on_back_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/menu.tscn")
 
+func _on_key_binding_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/key_binding.tscn")
+
 func _on_window_size_option_button_item_selected(index: int) -> void:
 	var size = OptionsManager.window_size_list[index]
 	options.window_width = size.width

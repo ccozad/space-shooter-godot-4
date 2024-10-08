@@ -28,54 +28,61 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -138.0
-offset_top = -62.0
-offset_right = 262.0
-offset_bottom = 62.0
+offset_left = -350.0
+offset_top = -137.5
+offset_right = 350.0
+offset_bottom = 162.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/h_separation = 24
+theme_override_constants/v_separation = 12
 columns = 2
 
 [node name="WindowSizeLabel" type="Label" parent="CanvasLayer/OptionsContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_ye0b1")
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 40
 text = "Window size:"
 
 [node name="WindowSizeOptionButton" type="OptionButton" parent="CanvasLayer/OptionsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_ye0b1")
+theme_override_font_sizes/font_size = 40
 
 [node name="FullScreenLabel" type="Label" parent="CanvasLayer/OptionsContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_ye0b1")
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 40
 text = "Full Screen:"
 
 [node name="FullScreenButton" type="CheckButton" parent="CanvasLayer/OptionsContainer"]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
 [node name="GammaLabel" type="Label" parent="CanvasLayer/OptionsContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_ye0b1")
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 40
 text = "Gamma Correction:"
 
 [node name="GammaSlider" type="HSlider" parent="CanvasLayer/OptionsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 max_value = 16.0
 step = 0.01
 
 [node name="MasterVolumeLabel" type="Label" parent="CanvasLayer/OptionsContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_ye0b1")
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 40
 text = "Master Volume:"
 
 [node name="MasterVolumeSlider" type="HSlider" parent="CanvasLayer/OptionsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 max_value = 1.0
 step = 0.01
 value = 1.0
@@ -83,12 +90,13 @@ value = 1.0
 [node name="MusicVolumeLabel" type="Label" parent="CanvasLayer/OptionsContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_ye0b1")
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 40
 text = "Music volume:"
 
 [node name="MusicVolumeSlider" type="HSlider" parent="CanvasLayer/OptionsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 max_value = 1.0
 step = 0.01
 value = 1.0
@@ -96,12 +104,13 @@ value = 1.0
 [node name="SoundEffectVolumeLabel" type="Label" parent="CanvasLayer/OptionsContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_ye0b1")
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 40
 text = "Sound effects volume:"
 
 [node name="SoundEffectsVolumeSlider" type="HSlider" parent="CanvasLayer/OptionsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 max_value = 1.0
 step = 0.01
 value = 1.0
@@ -123,8 +132,29 @@ theme_override_constants/margin_bottom = 30
 [node name="BackButton" type="Button" parent="CanvasLayer/BackContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_ye0b1")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 64
 text = "Back"
+
+[node name="KeyBindingContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -117.0
+offset_top = -200.0
+offset_right = 117.0
+offset_bottom = -119.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 30
+
+[node name="KeyBindingButton" type="Button" parent="CanvasLayer/KeyBindingContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ye0b1")
+theme_override_font_sizes/font_size = 64
+text = "Key Bindings"
 
 [node name="asteroid" parent="." instance=ExtResource("4_kkjhf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.7986, 0, 0)
@@ -139,3 +169,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.3023, 0, 0)
 [connection signal="value_changed" from="CanvasLayer/OptionsContainer/MusicVolumeSlider" to="." method="_on_music_volume_slider_value_changed"]
 [connection signal="value_changed" from="CanvasLayer/OptionsContainer/SoundEffectsVolumeSlider" to="." method="_on_sound_effects_volume_slider_value_changed"]
 [connection signal="pressed" from="CanvasLayer/BackContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/KeyBindingContainer/KeyBindingButton" to="." method="_on_key_binding_button_pressed"]
