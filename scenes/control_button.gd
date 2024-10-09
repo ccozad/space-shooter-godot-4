@@ -1,7 +1,10 @@
+class_name KeyBindingButton
 extends Button
 
 @export var action = "move_up"
 @export var primary = true
+
+var remap_mode = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -16,5 +19,35 @@ func display_current_key():
 		current_key = action_events[1].as_text()
 	text = current_key
 
-func _on_toggled(toggled_on: bool) -> void:
-	pass # Replace with function body.
+func remap_action_to(event):
+	var action_events = InputMap.action_get_events(action)
+	InputMap.action_erase_events(action)
+	var events = []
+	if primary:
+		events.append(event)
+		if action_events.size() > 1:
+			events.append(action_events[1])
+	else:
+		events.append(action_events[0])
+		events.append(event)
+	
+	for e in events:
+		InputMap.action_add_event(action, e)
+	KeyManager.keymaps[action] = events
+	KeyManager.save_keymap()
+	text = event.as_text()
+
+func _on_toggled(is_button_pressed: bool) -> void:
+	remap_mode = is_button_pressed
+	if is_button_pressed:
+		text = "..."
+		release_focus()
+	else:
+		display_current_key()
+
+func _input(event):
+	if remap_mode:
+		if event is InputEventKey or event is InputEventMouseButton:
+			remap_action_to(event)
+			if event is InputEventKey or not event.button_index == MOUSE_BUTTON_LEFT:
+				button_pressed = false
