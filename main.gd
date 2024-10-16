@@ -36,9 +36,11 @@ func _ready() -> void:
 	GameManager.set_player(ship_1)
 	hud.hide_boss_section()
 	debug.init(ship_1)
+	SoundManager.fade_in_background_song()
 
 func _input(_event):
 	if Input.is_action_just_pressed("main_menu"):
+		SoundManager.fade_out_background_song()
 		GameManager.release_mouse()
 		get_tree().change_scene_to_file("res://scenes/menu.tscn")
 	

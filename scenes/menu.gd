@@ -12,6 +12,7 @@ func _ready() -> void:
 	)
 	GameManager.set_camera(camera)
 	GameManager.spawn_stars(self)
+	SoundManager.fade_in_intro_song()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -20,12 +21,15 @@ func _process(delta: float) -> void:
 
 
 func _on_start_button_pressed() -> void:
+	SoundManager.fade_out_intro_song();
 	get_tree().change_scene_to_file("res://main.tscn")
 
 
 func _on_exit_button_pressed() -> void:
+	SoundManager.fade_out_intro_song();
 	get_tree().quit()
 
 
 func _on_settings_button_pressed() -> void:
+	SoundManager.fade_out_intro_song();
 	get_tree().change_scene_to_file("res://scenes/settings.tscn")

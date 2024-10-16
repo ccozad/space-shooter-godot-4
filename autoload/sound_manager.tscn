@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://krqnbspdwnbv"]
+[gd_scene load_steps=10 format=3 uid="uid://krqnbspdwnbv"]
 
 [ext_resource type="Script" path="res://autoload/sound_manager.gd" id="1_kcf2j"]
 [ext_resource type="AudioStream" uid="uid://crsjy2p2rku3v" path="res://sounds/laser.wav" id="2_cuaju"]
@@ -7,6 +7,8 @@
 [ext_resource type="AudioStream" uid="uid://crqvqdbv5v1up" path="res://sounds/hit_3.wav" id="5_pdakx"]
 [ext_resource type="AudioStream" uid="uid://b1daxv4o751mq" path="res://sounds/hit_4.wav" id="6_66abv"]
 [ext_resource type="AudioStream" uid="uid://cj58s28ypwqx3" path="res://sounds/enemy_laser.wav" id="7_5l806"]
+[ext_resource type="AudioStream" uid="uid://b64rj0jle71eu" path="res://sounds/background.wav" id="8_754pc"]
+[ext_resource type="AudioStream" uid="uid://dfiak6t8lvknr" path="res://sounds/intro.wav" id="9_fhpoj"]
 
 [node name="SoundManager" type="Node"]
 script = ExtResource("1_kcf2j")
@@ -41,3 +43,11 @@ bus = &"SoundEffects"
 [node name="EnemyBulletSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_5l806")
 bus = &"SoundEffects"
+
+[node name="Background" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_754pc")
+bus = &"Music"
+
+[node name="Intro" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_fhpoj")
+bus = &"Music"

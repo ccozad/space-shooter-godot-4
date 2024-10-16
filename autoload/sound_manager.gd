@@ -5,6 +5,8 @@ extends Node
 @onready var rock_hit_sound = [$RockHit, $RockHit2, $RockHit3]
 @onready var metal_hit_sound: AudioStreamPlayer = $MetalHit
 @onready var enemy_bullet_sound: AudioStreamPlayer = $EnemyBulletSound
+@onready var intro: AudioStreamPlayer = $Intro
+@onready var background: AudioStreamPlayer = $Background
 
 var master_bus
 var music_bus
@@ -40,3 +42,31 @@ func rock_hit():
 
 func metal_hit():
 	metal_hit_sound.play()
+
+func fade_in_intro_song(position = 0.0):
+	if not intro.playing:
+		intro.volume_db = -40
+		intro.play()
+		var tween = get_tree().create_tween()
+		tween.tween_property(intro, "volume_db", -15, 1)
+
+func fade_out_intro_song(position = 0.0):
+	if intro.playing:
+		var tween = get_tree().create_tween()
+		tween.tween_property(intro, "volume_db", -40, 1)
+		tween.tween_callback(intro.stop)
+
+func fade_in_background_song(position = 0.0):
+	if not background.playing:
+		background.volume_db = -40
+		background.play()
+		var tween = get_tree().create_tween()
+		tween.tween_property(background, "volume_db", -15, 1)
+
+func fade_out_background_song(position = 0.0):
+	if background.playing:
+		var tween = get_tree().create_tween()
+		tween.tween_property(background, "volume_db", -40, 1)
+		tween.tween_callback(background.stop)
+
+	
