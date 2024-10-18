@@ -3,10 +3,10 @@ There's a ship in space that uses a laser cannon to destroy obstacles and enemie
 
 Based on a tutorial series by FencerDevLog https://www.youtube.com/playlist?list=PLNhMW555KBpk8iyIKCIf3arzlK6_H8NLx
 
-Game Screen Shot
+# Game Screen Shot
 ![Game Screenshot](/images/game_screenshot.png?raw=true "Game Screenshot")
 
-Game Play Footage
+# Game Play Footage
 [![Space Shooter game play footage](https://img.youtube.com/vi/Jhe78JcGbwk/0.jpg)](https://www.youtube.com/watch?v=Jhe78JcGbwk)
 
 # Dev Environment
