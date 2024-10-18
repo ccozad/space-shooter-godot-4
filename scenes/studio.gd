@@ -6,7 +6,7 @@ extends Node3D
 func _ready() -> void:
 	OptionsManager.set_window_mode()
 	OptionsManager.resize_window()
-	GameManager.release_mouse()
+	GameManager.capture_mouse()
 	animation_player.play("author_fade_in_out")
 
 func _input(_event):

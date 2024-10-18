@@ -12,6 +12,7 @@ func _ready() -> void:
 	)
 	GameManager.set_camera(camera)
 	GameManager.spawn_stars(self)
+	GameManager.release_mouse()
 	SoundManager.fade_in_intro_song()
 
 

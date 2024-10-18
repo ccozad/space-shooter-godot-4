@@ -30,6 +30,7 @@ func _ready() -> void:
 	GameManager.set_camera(camera)
 	GameManager.set_world_environment(world_environment)
 	GameManager.spawn_stars(self)
+	GameManager.release_mouse()
 	ship_1.connect("player_destroyed", Callable(self, "_on_player_destroyed"))
 	ship_1.connect("update_hud", Callable(self, "_on_update_hud"))
 	ship_1.init()

@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://cpruwbuf612f6"]
+
+[ext_resource type="Script" path="res://scenes/stage_completed.gd" id="1_it0rf"]
+[ext_resource type="FontFile" uid="uid://dfvkq8aj67fa2" path="res://fonts/futurespore.regular.ttf" id="1_k0b04"]
+
+[sub_resource type="Animation" id="Animation_u4cs0"]
+resource_name = "fade_in"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Label:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ho8ch"]
+_data = {
+"fade_in": SubResource("Animation_u4cs0")
+}
+
+[node name="StageCompleted" type="Node3D"]
+script = ExtResource("1_it0rf")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -159.5
+offset_top = -16.5
+offset_right = 159.5
+offset_bottom = 16.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_fonts/font = ExtResource("1_k0b04")
+theme_override_font_sizes/font_size = 40
+text = "STAGE COMPLETED"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ho8ch")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

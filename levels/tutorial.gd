@@ -9,6 +9,7 @@ var WEAPON_POWERUP = preload("res://scenes/weapon_powerup.tscn")
 var BULLET = preload("res://scenes/bullet.tscn")
 var EXPLOSION = preload("res://scenes/explosion.tscn")
 var HIT_EFFECT = preload("res://scenes/hit_effect.tscn")
+var STAGE_COMPLETED = preload("res://scenes/stage_completed.tscn")
 
 var timeline = []
 var elapsed_time = 0.0
@@ -24,7 +25,8 @@ func init(node, more_scenes = []):
 		WEAPON_POWERUP,
 		BULLET,
 		EXPLOSION,
-		HIT_EFFECT]
+		HIT_EFFECT,
+		STAGE_COMPLETED]
 	scenes.append_array(more_scenes)
 	LevelManager.compile_shaders(node, scenes)
 	timeline.append({"timestamp": 1, "wave": get_asteroid_wave()})
@@ -32,6 +34,8 @@ func init(node, more_scenes = []):
 	timeline.append({"timestamp": 6, "wave": get_rocket_wave()})
 	timeline.append({"timestamp": 8, "wave": get_asteroid_wave()})
 	timeline.append({"timestamp": 12, "wave": get_enemy_ship_wave()})
+	timeline.append({"timestamp": 17, "wave": get_asteroid_wave()})
+	timeline.append({"timestamp": 21, "action": get_stage_completed()})
 	print("tutorial scene initialized")
 
 func process(node, delta):
@@ -40,8 +44,31 @@ func process(node, delta):
 		previous_second += 1
 		for event in timeline:
 			if event.timestamp <= elapsed_time and not event.has("processed"):
-				process_wave(node, event.wave)
-				event.processed = true
+				if event.has("wave"):
+					process_wave(node, event.wave)
+					event.processed = true
+				elif event.has("action"):
+					process_action(node, event.action)
+					event.processed = true
+				else:
+					print("Unknown event");
+					
+func process_action(node, actions):
+	print("Process lifecycle called")
+	for item in actions:
+		var action = item.action.instantiate()
+		action.init(item.parameters)
+		node.add_child(action)		
+
+func get_stage_completed():
+	var actions = []
+	actions.append({
+		"action":  STAGE_COMPLETED,
+		"parameters": {
+			"next_scene": "menu"
+		}
+	})
+	return actions
 
 func process_wave(node, wave):
 	print("Process wave called")
@@ -120,3 +147,4 @@ func get_enemy_ship_timeline():
 			}
 		}
 	]
+	
